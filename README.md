@@ -15,7 +15,7 @@
 <!-- ![Idea Seeds board](docs/screenshot.png) -->
 
 ## Why I built it
-My ideas kept dying in notes apps. Idea Seeds gives each one a life cycle, so old ideas keep getting attention. It is also the project where I learned pymongo, after building a Node and MongoDB app first.
+My ideas kept dying in notes apps. Idea Seeds gives each one a life cycle, so old ideas keep getting attention. It is also the project where I learned pymongo, after building a Node and MongoDB website first.
 
 ## Features
 - **Plant** an idea with an optional tag, right from the web page
