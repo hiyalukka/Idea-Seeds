@@ -1,0 +1,552 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Geist:wght@400..700&family=Geist+Mono:wght@500..600&display=swap");
+
+/* ---------- Tokens: a sunlit garden, light only ---------- */
+:root {
+  color-scheme: light;
+
+  --bg: #f1f6ea;
+  --panel: #e4eedb;
+  --surface: #fcfef9;
+  --line: #cfdfc3;
+  --ink: #14301f;
+  --muted: #51665a;
+  --accent: #2a7d42;
+  --on-accent: #f5fbef;
+  --soil: #7d6a55;
+  --shadow-rgb: 40 80 50;
+
+  /* Shape scale: cards 18px, panels 28px, pills and badges fully round */
+  --radius: 18px;
+  --radius-panel: 28px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --gap: clamp(1rem, 2.5vw, 2.25rem);
+
+  --font-display: "Bricolage Grotesque", "Geist", system-ui, sans-serif;
+  --font-body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+/* ---------- Botanical layers (all behind the content) ---------- */
+
+/* Sprig hanging from the top-right corner */
+html::before {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  width: clamp(200px, 30vw, 440px);
+  aspect-ratio: 270 / 240;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='130 0 270 240'%3E%3Cdefs%3E%3Cg id='l'%3E%3Cpath d='M0 0C-18-18-18-42 0-60C18-42 18-18 0 0Z'/%3E%3Cpath d='M0-3V-52' stroke='%23fff' stroke-opacity='.45' stroke-width='1.4' fill='none'/%3E%3C/g%3E%3C/defs%3E%3Cpath d='M400 20C320 40 250 90 190 170' fill='none' stroke='%232f6b40' stroke-width='3' stroke-linecap='round'/%3E%3Cuse xlink:href='%23l' fill='%234fa564' transform='translate(353 36) rotate(195) scale(.87)'/%3E%3Cuse xlink:href='%23l' fill='%232a7d42' transform='translate(353 36) rotate(305) scale(.97)'/%3E%3Cuse xlink:href='%23l' fill='%2386c07a' transform='translate(309 58) rotate(185)'/%3E%3Cuse xlink:href='%23l' fill='%234fa564' transform='translate(309 58) rotate(295) scale(1.07)'/%3E%3Cuse xlink:href='%23l' fill='%232a7d42' transform='translate(267 88) rotate(175) scale(1.03)'/%3E%3Cuse xlink:href='%23l' fill='%2386c07a' transform='translate(267 88) rotate(285) scale(1.1)'/%3E%3Cuse xlink:href='%23l' fill='%234fa564' transform='translate(227 126) rotate(165) scale(.93)'/%3E%3Cuse xlink:href='%23l' fill='%232a7d42' transform='translate(227 126) rotate(275)'/%3E%3Cuse xlink:href='%23l' fill='%2386c07a' transform='translate(190 170) rotate(215) scale(.87)'/%3E%3C/svg%3E") top right / contain no-repeat;
+  transform-origin: 100% 0;
+}
+
+/* Seedling growing from the bottom-left corner */
+html::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  bottom: 0;
+  left: 0;
+  width: clamp(96px, 13vw, 200px);
+  aspect-ratio: 200 / 250;
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 60 200 250'%3E%3Cdefs%3E%3Cg id='l'%3E%3Cpath d='M0 0C-18-18-18-42 0-60C18-42 18-18 0 0Z'/%3E%3Cpath d='M0-3V-52' stroke='%23fff' stroke-opacity='.45' stroke-width='1.4' fill='none'/%3E%3C/g%3E%3C/defs%3E%3Cellipse cx='30' cy='304' rx='48' ry='8' fill='%23a58f74' fill-opacity='.35'/%3E%3Cpath d='M20 300C40 240 70 190 120 120' fill='none' stroke='%232f6b40' stroke-width='3' stroke-linecap='round'/%3E%3Cuse xlink:href='%23l' fill='%234fa564' transform='translate(37 256) rotate(327) scale(.9)'/%3E%3Cuse xlink:href='%23l' fill='%232a7d42' transform='translate(37 256) rotate(77) scale(.97)'/%3E%3Cuse xlink:href='%23l' fill='%2386c07a' transform='translate(59 214) rotate(333) scale(.97)'/%3E%3Cuse xlink:href='%23l' fill='%234fa564' transform='translate(59 214) rotate(83) scale(1.03)'/%3E%3Cuse xlink:href='%23l' fill='%232a7d42' transform='translate(86 169) rotate(338) scale(.93)'/%3E%3Cuse xlink:href='%23l' fill='%2386c07a' transform='translate(86 169) rotate(88)'/%3E%3Cuse xlink:href='%23l' fill='%234fa564' transform='translate(120 120) rotate(36) scale(.93)'/%3E%3Cuse xlink:href='%23l' fill='%2386c07a' transform='translate(120 120) rotate(350) scale(.67)'/%3E%3Cuse xlink:href='%23l' fill='%232a7d42' transform='translate(120 120) rotate(80) scale(.67)'/%3E%3C/svg%3E") bottom left / contain no-repeat;
+  transform-origin: 0 100%;
+}
+
+/* ---------- Page ---------- */
+body {
+  margin: 0 auto;
+  max-width: 1280px;
+  min-height: 100dvh;
+  padding: clamp(1.25rem, 4vw, 3.5rem);
+
+  /* h1 and the three columns are direct children of body */
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr 1fr;
+  column-gap: var(--gap);
+  align-items: start;
+
+  font-family: var(--font-body);
+  line-height: 1.5;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgb(42 125 66 / 0.13) 1px, transparent 1.6px),
+    radial-gradient(50% 42% at 100% 0%, color-mix(in srgb, var(--accent) 14%, #ffffff), transparent 72%),
+    radial-gradient(45% 40% at 0% 100%, color-mix(in srgb, var(--accent) 10%, #ffffff), transparent 72%);
+  background-size: 24px 24px, auto, auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tree rings in the bottom-right corner */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: repeating-radial-gradient(
+    circle at 98% 104%,
+    transparent 0 30px,
+    color-mix(in srgb, var(--accent) 13%, transparent) 30px 32px
+  );
+  -webkit-mask-image: radial-gradient(circle at 98% 104%, #000 0, transparent 55vmax);
+  mask-image: radial-gradient(circle at 98% 104%, #000 0, transparent 55vmax);
+}
+
+/* Fine paper grain on a fixed, non-interactive layer */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- Title ---------- */
+h1 {
+  position: relative;
+  grid-column: 1 / -1;
+  margin: 0 0 clamp(2rem, 5vw, 3.5rem);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 9vw, 6rem);
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+/* Logo mark: a sprout on a green tile */
+h1::before {
+  content: "";
+  display: block;
+  width: 3.25rem;
+  height: 3.25rem;
+  margin-bottom: 1.25rem;
+  border-radius: 16px;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 40V24' stroke='%23fff' stroke-width='3' stroke-linecap='round' fill='none'/%3E%3Cpath d='M24 28C13 28 9 21 9 13C18 13 24 18 24 28Z' fill='%23fff'/%3E%3Cpath d='M24 24C24 15 29 10 39 10C39 19 34 24 24 24Z' fill='%23fff' fill-opacity='.8'/%3E%3C/svg%3E") center / 68% no-repeat,
+    linear-gradient(145deg, color-mix(in srgb, var(--accent) 80%, #ffffff), var(--accent));
+  box-shadow: 0 14px 24px -10px rgb(var(--shadow-rgb) / 0.55);
+}
+
+h1::after {
+  content: "Every idea starts as a seed. Water it, grow it, ship it.";
+  display: block;
+  max-width: 36ch;
+  margin-top: 1.25rem;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+/* ---------- Columns: garden beds that step up as ideas grow ---------- */
+.column {
+  --lift: 0rem;
+  --p: 0.14;
+  --badge: color-mix(in srgb, var(--accent) 12%, #ffffff);
+
+  position: relative;
+  min-width: 0;
+  margin-top: var(--lift);
+  padding: 1.6rem 1.25rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-panel);
+  background: color-mix(in srgb, var(--panel) 78%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 30px 50px -38px rgb(var(--shadow-rgb) / 0.5);
+}
+
+.column.seed    { --lift: 5rem;   --p: 0.14; }
+.column.growing { --lift: 2.5rem; --p: 0.55; }
+.column.built   { --lift: 0rem;   --p: 1; }
+
+/* Growth rule on the top edge: longer means further along */
+.column::before {
+  content: "";
+  position: absolute;
+  top: -2px;
+  left: 1.75rem;
+  width: calc((100% - 3.5rem) * var(--p));
+  height: 3px;
+  border-radius: 3px;
+  background: var(--accent);
+}
+
+.column h2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin: 0 0 1.25rem;
+  padding-left: 3.6rem;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.column h2::before,
+.column h2::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+}
+
+/* Round badge behind each stage symbol */
+.column h2::before {
+  left: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--badge);
+  box-shadow: 0 6px 12px -6px rgb(var(--shadow-rgb) / 0.4);
+  transform: translateY(-50%);
+}
+
+.column h2::after {
+  left: 1.375rem;
+  transform: translate(-50%, -50%);
+}
+
+/* Seed: a small tilted seed */
+.column.seed h2::after {
+  width: 0.8rem;
+  height: 1.15rem;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: var(--soil);
+  box-shadow: inset 0.15rem 0.15rem 0 rgb(255 255 255 / 0.3);
+  transform: translate(-50%, -50%) rotate(28deg);
+}
+
+/* Growing: a leaf with a vein */
+.column.growing h2::after {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 0 100% 0 100%;
+  background:
+    linear-gradient(45deg, transparent calc(50% - 1px), rgb(255 255 255 / 0.6) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    var(--accent);
+  transform: translate(-50%, -50%) rotate(-6deg);
+}
+
+/* Built: a bloom, petals around a centre */
+.column.built h2::after {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--accent) 0 16%, var(--badge) 17% 34%, transparent 35%),
+    repeating-conic-gradient(var(--accent) 0 16deg, transparent 16deg 45deg);
+}
+
+/* Empty column: says how to fill it */
+.column:not(:has(.card))::after {
+  display: block;
+  margin-bottom: 1.1rem;
+  padding: 1.4rem;
+  border: 1px dashed color-mix(in srgb, var(--accent) 40%, var(--line));
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--muted);
+}
+.column.seed:not(:has(.card))::after    { content: "No seeds yet. Plant one with: python seeds.py add"; }
+.column.growing:not(:has(.card))::after { content: "Nothing growing. Move a seed here with the grow command."; }
+.column.built:not(:has(.card))::after   { content: "Nothing built yet. Finish an idea and mark it built."; }
+
+/* ---------- Cards: the style tells you the stage ---------- */
+.card {
+  position: relative;
+  margin-bottom: 0.9rem;
+  padding: 1.1rem 1.25rem 1.15rem 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow:
+    0 1px 2px rgb(var(--shadow-rgb) / 0.12),
+    0 14px 26px -14px rgb(var(--shadow-rgb) / 0.4);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgb(var(--shadow-rgb) / 0.15),
+    0 24px 36px -16px rgb(var(--shadow-rgb) / 0.5);
+}
+
+.card:active {
+  transform: translateY(-1px) scale(0.985);
+}
+
+.card p {
+  margin: 0;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+  overflow-wrap: anywhere;
+}
+
+/* Seed: dashed outline, a tiny seed in the corner */
+.seed .card {
+  border-style: dashed;
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  box-shadow: none;
+}
+.seed .card:hover {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  box-shadow: 0 16px 26px -18px rgb(var(--shadow-rgb) / 0.55);
+}
+.seed .card p {
+  padding-right: 1.4rem;
+}
+.seed .card::after {
+  content: "";
+  position: absolute;
+  top: 1.05rem;
+  right: 1.1rem;
+  width: 0.5rem;
+  height: 0.74rem;
+  border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: var(--soil);
+  opacity: 0.75;
+  transform: rotate(28deg);
+  transition: transform 0.4s var(--ease);
+}
+.seed .card:hover::after {
+  transform: rotate(-12deg) translateY(-2px);
+}
+
+/* Growing: a partly filled growth bar and a small leaf in the corner */
+.growing .card::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  bottom: 1rem;
+  left: 0;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: linear-gradient(
+    to top,
+    var(--accent) 0 62%,
+    color-mix(in srgb, var(--accent) 22%, transparent) 62%
+  );
+}
+.growing .card p {
+  padding-right: 1.5rem;
+}
+.growing .card::after {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  right: 1.05rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  border-radius: 0 100% 0 100%;
+  background:
+    linear-gradient(45deg, transparent calc(50% - 1px), rgb(255 255 255 / 0.6) calc(50% - 1px) calc(50% + 1px), transparent calc(50% + 1px)),
+    var(--accent);
+  transform: rotate(-6deg);
+  transition: transform 0.4s var(--ease);
+}
+.growing .card:hover::after {
+  transform: rotate(10deg) scale(1.12);
+}
+
+/* Built: solid green with a soft sheen and a check mark */
+.built .card {
+  border-color: transparent;
+  color: var(--on-accent);
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgb(255 255 255 / 0.2), transparent 60%),
+    var(--accent);
+}
+.built .card p {
+  padding-right: 2rem;
+}
+.built .card::before {
+  content: "";
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 0.2);
+}
+.built .card::after {
+  content: "";
+  position: absolute;
+  top: 1.2rem;
+  right: 1.43rem;
+  width: 0.34rem;
+  height: 0.62rem;
+  border: solid var(--on-accent);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* ---------- Tags ---------- */
+.tag {
+  display: inline-block;
+  margin-top: 0.85rem;
+  padding: 0.22rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+}
+.tag::before {
+  content: "#";
+  margin-right: 0.05em;
+  opacity: 0.6;
+}
+.growing .tag {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+}
+.built .tag {
+  color: var(--on-accent);
+  border-color: rgb(255 255 255 / 0.4);
+}
+
+/* ---------- Motion (only if the system allows it) ---------- */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes sway-leaf {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-6deg); }
+  50%      { transform: translate(-50%, -50%) rotate(7deg); }
+}
+
+@keyframes sway-branch {
+  from { transform: rotate(-1.4deg); }
+  to   { transform: rotate(1.6deg); }
+}
+
+@keyframes sway-seedling {
+  from { transform: rotate(1.2deg); }
+  to   { transform: rotate(-1.4deg); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* "backwards" so hover transforms keep working after the entrance */
+  h1      { animation: rise 0.8s var(--ease) backwards; }
+  .column { animation: rise 0.8s var(--ease) backwards; }
+  .column.growing { animation-delay: 0.1s; }
+  .column.built   { animation-delay: 0.2s; }
+
+  .card {
+    animation: rise 0.7s var(--ease) backwards;
+    animation-delay: calc(0.25s + var(--n, 0) * 0.07s);
+  }
+  .card:nth-child(2) { --n: 0; }
+  .card:nth-child(3) { --n: 1; }
+  .card:nth-child(4) { --n: 2; }
+  .card:nth-child(5) { --n: 3; }
+  .card:nth-child(6) { --n: 4; }
+  .card:nth-child(7) { --n: 5; }
+  .card:nth-child(8) { --n: 6; }
+  .card:nth-child(n + 9) { --n: 7; }
+
+  /* Plants moving in a light breeze: slow and small */
+  html::before { animation: sway-branch 9s ease-in-out infinite alternate; }
+  html::after  { animation: sway-seedling 11s ease-in-out infinite alternate; }
+  .column.growing h2::after { animation: sway-leaf 6s ease-in-out infinite; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .seed .card::after,
+  .growing .card::after {
+    transition: none;
+  }
+}
+
+/* ---------- Small screens: one column, no staircase ---------- */
+@media (max-width: 900px) {
+  body {
+    grid-template-columns: 1fr;
+  }
+  .column,
+  .column.seed,
+  .column.growing,
+  .column.built {
+    --lift: 0rem;
+    margin-top: 1.75rem;
+  }
+  html::before {
+    width: clamp(150px, 38vw, 240px);
+    opacity: 0.7;
+  }
+}
+
+@media (max-width: 640px) {
+  html::after {
+    width: 84px;
+    opacity: 0.8;
+  }
+}
+
+/* ---------- Web form and card buttons ---------- */
+form.add { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: .6rem; margin: 0 0 1rem; }
+form.add input {
+  height: 2.9rem; padding: 0 1.1rem; border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink); font: inherit;
+}
+form.add input[name="text"] { flex: 1 1 18rem; }
+form.add input[name="tag"] { flex: 0 1 10rem; }
+form.add button {
+  height: 2.9rem; padding: 0 1.6rem; border: 0; border-radius: 999px;
+  background: var(--accent); color: var(--on-accent);
+  font: 600 1rem var(--font-body); cursor: pointer;
+  transition: transform .3s var(--ease);
+}
+form.add button:hover { transform: translateY(-2px); }
+form.add button:active { transform: scale(.97); }
+
+.actions { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .85rem; }
+.actions form { margin: 0; }
+.actions button {
+  padding: .3rem .85rem; border: 1px solid var(--line); border-radius: 999px;
+  background: transparent; color: var(--muted);
+  font: 500 .78rem var(--font-body); cursor: pointer;
+}
+.actions button:hover { color: var(--accent); border-color: var(--accent); }
+.built .actions button { color: var(--on-accent); border-color: rgb(255 255 255 / .5); }
+.built .actions button:hover { background: rgb(255 255 255 / .18); color: var(--on-accent); }
+
+input:focus-visible, button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 2px;
+}
